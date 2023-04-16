@@ -8,7 +8,7 @@ type AddressType = {
     city: CityType
 }
 
-type StudentType = {
+export type StudentType = {
     name: string
     age: number
     isActive: boolean
