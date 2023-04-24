@@ -1,5 +1,5 @@
 import {CityType} from "../02-object-test/02_02";
-import {getStreetsTitleOfGovernmentsBuildings, getStreetsTitleOfHouses} from "./05_02";
+import {createMessages, getStreetsTitleOfGovernmentsBuildings, getStreetsTitleOfHouses} from "./05_02";
 
 let city: CityType
 beforeEach(() => {
@@ -8,15 +8,15 @@ beforeEach(() => {
         houses: [
             {
                 builtAt: 2012, repaired: false,
-                address: {number: 10, street: {title: '130 Troitskaya'}}
+                address: {number: 10, street: {title: 'White street'}}
             },
             {
                 builtAt: 2023, repaired: true,
-                address: {number: 100, street: {title: '130 Troitskaya'}}
+                address: {number: 100, street: {title: 'Happy street'}}
             },
             {
                 builtAt: 1998, repaired: true,
-                address: {number: 23, street: {title: '130 Troitskaya'}}
+                address: {number: 23, street: {title: 'Happy street'}}
             },
         ],
         governmentBuilding: [
@@ -36,7 +36,7 @@ beforeEach(() => {
                 staffCount: 300,
                 address: {
                     street: {
-                        title: '3 Central Str'
+                        title: 'South Str'
                     }
                 }
             }
@@ -55,20 +55,20 @@ test('list of streets title of government buildings', () => {
 
 
 test('list of streets title', () => {
-    let streetsName = getStreetsTitleOfHouses(city.houses)
+    let streetsName = createMessages(city.houses)
 
     expect(streetsName.length).toBe(3)
-    expect(streetsName[0]).toBe('White street')
-    expect(streetsName[1]).toBe('Happy street')
-    expect(streetsName[2]).toBe('Happy street')
+    expect(streetsName[0]).toBe('Hello guys from White street')
+    expect(streetsName[1]).toBe('Hello guys from Happy street')
+    expect(streetsName[2]).toBe('Hello guys from Happy street')
 })
 
 
 test('create greeting message for streets', () => {
-    let streets = getStreetsTitleOfHouses(city.houses)
+    let messages = getStreetsTitleOfHouses(city.houses)
 
-    expect(streets.length).toBe(3)
-    expect(streets[0]).toBe('White street')
-    expect(streets[1]).toBe('Happy street')
-    expect(streets[2]).toBe('Happy street')
+    expect(messages.length).toBe(3)
+    expect(messages[0]).toBe('White street')
+    expect(messages[1]).toBe('Happy street')
+    expect(messages[2]).toBe('Happy street')
 })
