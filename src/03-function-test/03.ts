@@ -41,5 +41,5 @@ export const toHireStaff = (building: GovernmentBuildingsType, staffCountToHire:
 }
 
 export const createMessage = (city: CityType) => {
-    return 'Hello ' + city.title + ' citizens. I want to be happy. All ' + city.citizenNumber + ' peoples'
+    return `Hello ${city.title} citizens. I want to be happy. All ${city.citizenNumber} peoples`
 }
