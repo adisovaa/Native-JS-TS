@@ -47,3 +47,5 @@ test('doest student live in the city?', () => {
     expect(result1).toBe(false)
     expect(result2).toBe(true)
 })
+
+
