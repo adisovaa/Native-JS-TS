@@ -1,7 +1,7 @@
 export type PeopleType = {
     name: string
     age: number
-    lessons: Array<{ title: string }>
+    lessons: Array<{ title: string, name: string }>
     address: {
         street: {
             streetName: string
@@ -14,7 +14,7 @@ beforeEach(() => {
     props = {
         name: 'Alexa',
         age: 23,
-        lessons: [{title: '1'}, {title: '2'}, {title: '3'}],
+        lessons: [{title: '1', name: 'React'}, {title: '2', name: 'React'}, {title: '3', name: 'React'}],
         address: {
             street: {
                 streetName: 'Troitskaya 130'
@@ -52,4 +52,6 @@ test('', () => {
     expect(ls2.title).toBe('2')
     expect(restLessons.length).toBe(1)
     expect(restLessons[0].title).toBe('3')
+
+    expect(restLessons[0]).toStrictEqual({title: '3', name: 'React'})
 })
