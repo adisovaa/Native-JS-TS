@@ -4,6 +4,13 @@ export type UserType = {
     address: { city: string, house: number }
 }
 
+export type CompanyType = {
+    id: number
+    userName: string
+    companyId: number
+    newTitle: string
+}
+
 export type LaptopType = {
     title: string
 }
@@ -16,6 +23,10 @@ export type UserWithBooksType = UserType & {
     books: Array<string>
 }
 
+export type UserWithCompanyType = UserType & {
+    companies: Array<{ id: number, title: string }>
+}
+
 export function makeHairstyle(u: UserType, power: number) {
     const copy = {
         ...u,
@@ -24,7 +35,6 @@ export function makeHairstyle(u: UserType, power: number) {
     copy.hair = u.hair / power
     return copy
 }
-
 
 export function moveUser(u: UserWithLaptopType, city: string) {
     return {
@@ -35,7 +45,6 @@ export function moveUser(u: UserWithLaptopType, city: string) {
     }
 }
 
-
 export function upgradeLaptop(u: UserWithLaptopType, laptop: string) {
     return {
         ...u,
@@ -45,11 +54,33 @@ export function upgradeLaptop(u: UserWithLaptopType, laptop: string) {
     }
 }
 
-export function addNewUserBooks(u: UserWithLaptopType, books: Array<string>) {
+export function addNewUserBooks(u: UserWithBooksType, newBook: Array<string>) {
     return {
         ...u,
-        books: {
-            ...books, books: books
-        }
+        books: [
+            ...u.books, newBook
+        ]
     }
+}
+
+export const removeBooks = (u: UserWithBooksType, booksForDelete: string) => ({
+    ...u,
+    books: u.books.filter(b => b !== booksForDelete)
+})
+
+export function updateCompany(u: UserWithCompanyType, companyId: number, companyTitle: string) {
+    return {
+        ...u,
+        companies: [
+            ...u.companies.map(c => c.id === companyId ? {...c, title: companyTitle} : c)
+        ]
+    }
+}
+
+
+export const updateCompany2 = (companies: {[key: string]: Array<CompanyType>}, userName: string, companyId: number, newTitle: string) => {
+    let companyCopy = {...companies}
+    companyCopy[userName] = companyCopy[userName].map(c => c.id === companyId ? {...c, title: newTitle} : c)
+
+    return companyCopy
 }
