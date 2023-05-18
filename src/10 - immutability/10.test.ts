@@ -1,10 +1,9 @@
 import {
-    addNewUserBooks,
     makeHairstyle,
-    moveUser,
+    moveUser, removeBooks, updateCompany, updateCompany2,
     upgradeLaptop,
     UserType,
-    UserWithBooksType,
+    UserWithBooksType, UserWithCompanyType,
     UserWithLaptopType
 } from "./10.j";
 
@@ -73,7 +72,7 @@ test('upgrade user laptop', () => {
 })
 
 
-test('upgrade user laptop', () => {
+test('remove books from array', () => {
     let user: UserWithLaptopType & UserWithBooksType = {
         name: 'Dimych',
         hair: 32,
@@ -87,12 +86,47 @@ test('upgrade user laptop', () => {
         books: ['book1', 'book2', 'book3']
     }
 
-    const addNewBooksCopy = addNewUserBooks(user, ['html', 'css', 'js', 'ts'])
+    const removeBooksCopy = removeBooks(user, 'book1')
 
-    expect(user).not.toBe(addNewBooksCopy)
-    expect(user.address).toBe(addNewBooksCopy.address)
-    expect(user.laptop).toBe(addNewBooksCopy.laptop)
-    expect(user.laptop.title).toBe(addNewBooksCopy.laptop.title)
-    expect(user.books).not.toBe(addNewBooksCopy.books)
-    expect(user.books[3]).toBe('html')
+    expect(user).not.toBe(removeBooksCopy)
+    expect(user.address).toBe(removeBooksCopy.address)
+    expect(user.books).not.toBe(removeBooksCopy.books)
+    expect(removeBooksCopy.books[0]).toBe('book2')
+})
+
+
+// test('update company name', () => {
+//     let user: UserWithLaptopType & UserWithCompanyType = {
+//         name: 'Dimych',
+//         hair: 32,
+//         address: {
+//             city: 'Minsk',
+//             house: 12
+//         },
+//         laptop: {
+//             title: 'Asus'
+//         },
+//         companies: [{id: 1, title: 'Google'}, {id: 2, title: 'Microsoft'},]
+//     }
+//
+//     const newCompanyCopy = updateCompany(user, 1, 'Tesla') as UserWithCompanyType
+//
+//     expect(user).not.toBe(newCompanyCopy)
+//     expect(user.address).toBe(newCompanyCopy.address)
+//     expect(newCompanyCopy.companies[0].title).toBe('Tesla')
+// })
+
+
+test('update company name', () => {
+
+    let companies = {
+        'Siri': [{id: 1, title: 'Google'}, {id: 2, title: 'Microsoft'}],
+        'Alexa': [{id: 1, title: 'Meta'}]
+    }
+
+    const copy = updateCompany2(companies, 'Siri', 1, 'Google Inc')
+
+    expect(copy['Siri']).not.toBe(companies['Siri'])
+    expect(copy['Alexa']).toBe(companies['Alexa'])
+
 })
