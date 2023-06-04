@@ -28,7 +28,7 @@ let a1 = [1, 2, 3, 4, 5]
 let b1 = [...a1]
 
 
-let a2 = [{name: 'D', a: {'we'}}, {name: 'S'}]
+let a2 = [{name: 'D', a: 'we'}, {name: 'S'}]
 // let b2 = [...a2]
 let b2 = a2.map(el => {
     return {
